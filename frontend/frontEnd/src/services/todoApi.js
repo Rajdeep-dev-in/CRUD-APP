@@ -8,6 +8,9 @@ export const todoApi = createApi({
             query: () => 'todo',
             providesTags: ['todo']
         }),
+        getTodo: builder.query({
+            query: (id) => `todo/${id}`
+        }),
         createTodo: builder.mutation({
             query: (data) => ({
                 url: 'todo',
@@ -15,8 +18,23 @@ export const todoApi = createApi({
                 body: data
             }),
             invalidatesTags: ['todo']
+        }),
+        deleteTodo: builder.mutation({
+            query: (id) =>({
+                url: `todo/${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: ['todo']
+        }),
+        editTodo: builder.mutation({
+            query: ({id, ...data}) => ({
+                url: `todo/${id}`,
+                method: "PATCH",
+                body: data
+            }),
+            invalidatesTags: ['todo']
         })
     })
 })
 
-export const {useGetAllTodoQuery, useCreateTodoMutation } = todoApi
+export const {useGetAllTodoQuery, useCreateTodoMutation, useDeleteTodoMutation, useGetTodoQuery, useEditTodoMutation } = todoApi

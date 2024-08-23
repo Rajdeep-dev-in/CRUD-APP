@@ -8,9 +8,10 @@ import Task from './pages/Task.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
+    <Route path="/" element={<App />} >
       <Route path="" element={ <Home />} />
       <Route path="/task" element={<Task />} />
+      <Route path='/task/:id' element={<Task />} />
     </Route>
   )
 )
